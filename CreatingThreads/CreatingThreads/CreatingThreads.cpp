@@ -46,6 +46,22 @@ DWORD WINAPI MinMax(LPVOID lpParameters)
 	return 0;
 }
 
+DWORD WINAPI Average(LPVOID lpParameters)
+{
+	std::cout << "Average thread is started.\n";
+	Array* arr = (Array*)lpParameters;
+
+	int average = 0;
+	for (int i = 0; i < arr->size; i++) {
+		average += arr->p[i];
+		Sleep(12);
+	}
+	arr->average = average / arr->size;
+
+	std::cout << "Average number in array: " << arr->average << std::endl;
+	return 0;
+}
+
 int main()
 {
 }

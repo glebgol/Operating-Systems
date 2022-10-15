@@ -1,0 +1,5 @@
+File report "file.bin".
+1 ivan 12 3600
+2 2 2 600
+3 3 3 900
+4 4 4 1200

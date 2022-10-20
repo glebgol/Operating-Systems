@@ -74,7 +74,7 @@ int main()
 	PROCESS_INFORMATION piCom1;
 	ZeroMemory(&si1, sizeof(STARTUPINFO));
 	si1.cb = sizeof(STARTUPINFO);
-	// создаем новый консольный процесс
+
 	if (!CreateProcess(NULL, ip_line_creator, NULL, NULL, FALSE,
 		CREATE_NEW_CONSOLE, NULL, NULL, &si1, &piCom1))
 	{
@@ -85,9 +85,9 @@ int main()
 		return 0;
 	}
 	_cputs("The Creator process is created.\n");
-	// ждем завершения созданного прцесса
+
 	WaitForSingleObject(piCom1.hProcess, INFINITE);
-	// закрываем дескрипторы этого процесса в текущем процессе
+
 	CloseHandle(piCom1.hThread);
 	CloseHandle(piCom1.hProcess);
 
@@ -105,7 +105,7 @@ int main()
 	PROCESS_INFORMATION piCom2;
 	ZeroMemory(&si2, sizeof(STARTUPINFO));
 	si2.cb = sizeof(STARTUPINFO);
-	// создаем новый консольный процесс
+
 	if (!CreateProcess(NULL, ip_line_reporter, NULL, NULL, FALSE,
 		CREATE_NEW_CONSOLE, NULL, NULL, &si2, &piCom2))
 	{
@@ -116,9 +116,9 @@ int main()
 		return 0;
 	}
 	_cputs("The Reporter process is created.\n");
-	// ждем завершения созданного прцесса
+
 	WaitForSingleObject(piCom2.hProcess, INFINITE);
-	// закрываем дескрипторы этого процесса в текущем процессе
+
 	CloseHandle(piCom2.hThread);
 	CloseHandle(piCom2.hProcess);
 	GetReport(std::cout, binfile_name, payment_by_hour);

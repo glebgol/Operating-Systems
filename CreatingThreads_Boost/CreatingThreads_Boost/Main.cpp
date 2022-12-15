@@ -43,14 +43,20 @@ void printArr(int* arr, int n) {
 	}
 }
 
-int main() {
+int main() 
+{
+	const int MIN_DISTRIB_1 = 5;
+	const int MAX_DISTRIB_1 = 15;
+	const int MIN_DISTRIB_2 = 0;
+	const int MAX_DISTRIB_2 = 35000;
 
 	typedef boost::mt19937 RNGType;
 	RNGType rng(time(0));
-	boost::uniform_int<> arraySize(5, 15);
+	boost::uniform_int<> arraySize(MIN_DISTRIB_1, MAX_DISTRIB_1);
 	boost::variate_generator<RNGType, boost::uniform_int<>> dice(rng, arraySize);
 	int n = dice();
-	boost::uniform_int<> arrayElem(0, 35000);
+
+	boost::uniform_int<> arrayElem(MIN_DISTRIB_2, MAX_DISTRIB_2);
 	dice.distribution() = arrayElem;
 	int* arr = new int[n];
 	for (int i = 0; i < n; i++) {

@@ -38,13 +38,13 @@ void average(Array* args) {
 }
 
 void printArr(int* arr, int n) {
-	for (int i = 0; i < n; i++)
+	for (int i = 0; i < n; i++) {
 		printf("%d ", arr[i]);
+	}
 }
 
 int main() {
 
-	//array generation
 	typedef boost::mt19937 RNGType;
 	RNGType rng(time(0));
 	boost::uniform_int<> arraySize(5, 15);
@@ -60,12 +60,8 @@ int main() {
 	printArr(arr, n);
 	printf("\n\n");
 
-	//Init args 
-	Array* args = new Array();
-	args->size = n;
-	args->arr = arr;
+	Array* args = new Array(arr, n);
 
-	//create threads
 	boost::thread min_maxThread(min_max, args);
 	boost::thread averageThread(average, args);
 	min_maxThread.join();
@@ -73,7 +69,8 @@ int main() {
 
 	arr[args->minInd] = arr[args->maxInd] = args->avg;
 	std::cout << "\nChanged array: " << std::endl;
-	printArr(arr, n);
+
+	args->Print(std::cout);
 	_getch();
 	return 0;
 }

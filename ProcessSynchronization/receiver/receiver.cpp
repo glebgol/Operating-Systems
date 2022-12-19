@@ -3,9 +3,9 @@
 #include <string>
 #include <stdlib.h>
 #include <fstream>
-#include "../sender/sender.h"
 const int FILENAME_SIZE = 100;
 const int SIZE_OF_ARGS = 200;
+const char* EVENT_NAME = "StartSenderEvent";
 
 CRITICAL_SECTION criticalSection;
 
@@ -21,7 +21,7 @@ int main() {
 
     InitializeCriticalSection(&criticalSection);
 
-    const char* appName = "C:\\Users\\maxim\\Documents\\Operating-Systems-Labs\\lab4\\cmake-build-debug\\sender.exe";
+    const char* appName = "sender.exe";
     HANDLE eventToStart = CreateEventA(&securityAtb, FALSE, FALSE, EVENT_NAME);
     for (int i = 0; i < countOfSenders; i++) {
         char arg[SIZE_OF_ARGS];

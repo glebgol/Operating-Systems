@@ -5,7 +5,6 @@
 #include <fstream>
 #include "../contracts/Constants.h"
 
-
 CRITICAL_SECTION criticalSection;
 
 int main() {

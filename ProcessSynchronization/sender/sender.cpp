@@ -3,10 +3,8 @@
 #include <Windows.h>
 #include <string>
 #include <cstdlib>
+#include "../contracts/Constants.h"
 
-const char* EVENT_NAME = "StartSenderEvent";
-const int NUM_OF_ARGS = 2;
-const char* STOP_MESSAGE = "0";
 CRITICAL_SECTION criticalSection;
 
 int main(int args, char* argv[]) {

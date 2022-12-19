@@ -3,9 +3,8 @@
 #include <string>
 #include <stdlib.h>
 #include <fstream>
-const int FILENAME_SIZE = 100;
-const int SIZE_OF_ARGS = 200;
-const char* EVENT_NAME = "StartSenderEvent";
+#include "../contracts/Constants.h"
+
 
 CRITICAL_SECTION criticalSection;
 
@@ -16,7 +15,6 @@ int main() {
     printf("Input processes of sender number");
     int countOfSenders;
     std::cin >> countOfSenders;
-
     HANDLE* SenderEventsToSync = new HANDLE[countOfSenders];
 
     InitializeCriticalSection(&criticalSection);

@@ -1,20 +1,42 @@
-// receiver.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
+#include <Windows.h>
+#include <string>
+#include <stdlib.h>
+#include <fstream>
+#include "../sender/sender.h"
+const int FILENAME_SIZE = 100;
+const int SIZE_OF_ARGS = 200;
 
-int main()
-{
-    std::cout << "Hello World!\n";
+CRITICAL_SECTION criticalSection;
+
+int main() {
+    printf("Input filename: ");
+    char filename[FILENAME_SIZE];
+    std::cin >> filename;
+    printf("Input processes of sender number");
+    int countOfSenders;
+    std::cin >> countOfSenders;
+
+    HANDLE* SenderEventsToSync = new HANDLE[countOfSenders];
+
+    InitializeCriticalSection(&criticalSection);
+
+    const char* appName = "C:\\Users\\maxim\\Documents\\Operating-Systems-Labs\\lab4\\cmake-build-debug\\sender.exe";
+    HANDLE eventToStart = CreateEventA(&securityAtb, FALSE, FALSE, EVENT_NAME);
+    for (int i = 0; i < countOfSenders; i++) {
+        char arg[SIZE_OF_ARGS];
+        char buff[10];
+        strcat(arg, filename);
+
+        char argg[10];
+        strcat(argg, "Event ");
+        strcat(argg, itoa(i, buff, 10));
+
+        strcat(arg, " Event ");
+        strcat(arg, itoa(i, buff, 10));
+
+    }
+    WaitForMultipleObjects(countOfSenders, SenderEventsToSync, TRUE, INFINITE);
+    SetEvent(eventToStart);
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

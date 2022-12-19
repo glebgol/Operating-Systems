@@ -3,6 +3,8 @@
 #include <Windows.h>
 #include <string>
 #include <cstdlib>
+#include "sender.h"
+
 const char* EVENT_NAME = "StartSenderEvent";
 const int NUM_OF_ARGS = 2;
 const char* STOP_MESSAGE = "0";
